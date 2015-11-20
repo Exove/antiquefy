@@ -61,7 +61,7 @@ Convert the given function or generator function into a function which takes a `
 | --- | --- | --- |
 | `fn` | `Function` or `GeneratorFunction` | The function (or generator function) to Antiquefy. |
 | `options` | `Object` | Options for Antiquefy. |
-| `options.spread` | `Object` | Set this to `true` if you wish to spread the returned array elements as individual arguments for the `done` callback. Optional. Default: `false` |
+| `options.spread` | `boolean` | Set this to `true` if you wish to spread the returned array elements as individual arguments for the `done` callback. Optional. Default: `false` |
 
 #### Spreading arguments
 
