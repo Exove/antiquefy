@@ -11,8 +11,15 @@
     "generator",
     "promise"
   ],
-  "author": "Eetu Latja <eetu@exove.fi>",
+  "author": {
+    "name": "Eetu Latja",
+    "email": "eetu@exove.fi"
+  },
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Exove/antiquefy"
+  },
   "dependencies": {
     "bluebird": "^3.0.5",
     "lodash": "^3.10.1"
