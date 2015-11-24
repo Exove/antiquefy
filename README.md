@@ -12,42 +12,46 @@ For example, [passport-local](https://github.com/jaredhanson/passport-local) str
 
 Here is the antiquefied version of the Passport local strategy example using generators:
 
-	passport.use(new LocalStrategy(antiquefy(
-		function*(username, password) {
-			var user = yield User.findOne({ username: username });
+```js
+passport.use(new LocalStrategy(antiquefy(
+	function*(username, password) {
+		var user = yield User.findOne({ username: username });
 
-			if (!user) {
-				return false;
-			}
-			
-			if (!user.verifyPassword(password)) {
-				return false;
-			}
-			
-			return user;
+		if (!user) {
+			return false;
 		}
-	)));
+		
+		if (!user.verifyPassword(password)) {
+			return false;
+		}
+		
+		return user;
+	}
+)));
+```
 	
 ### Promises
 
 The above could also be achieved using promises:
 
-	passport.use(new LocalStrategy(antiquefy(
-		function(username, password) {
-			return User.findOne({ username: username }).then(function(user) {
+```js
+passport.use(new LocalStrategy(antiquefy(
+	function(username, password) {
+		return User.findOne({ username: username }).then(function(user) {
 
-				if (!user) {
-					return false;
-				}
-			
-				if (!user.verifyPassword(password)) {
-					return false;
-				}
-			
-				return user;
-			});
-		}
-	)));
+			if (!user) {
+				return false;
+			}
+		
+			if (!user.verifyPassword(password)) {
+				return false;
+			}
+		
+			return user;
+		});
+	}
+)));
+```
 
 Functionally this is equivalent to the generator example, but is little more verbose and requires one extra indentation level.
 
@@ -67,15 +71,17 @@ Convert the given function or generator function into a function which takes a `
 
 If the `done` callback takes more than one parameter, it can be supplied multiple arguments by returning an array and setting the `spread` option to `true`.
 
-	var sum = antiquefy(function(a, b) {
-		return [a, b, a + b];
-	}, { spread: true });
+```js
+var sum = antiquefy(function(a, b) {
+	return [a, b, a + b];
+}, { spread: true });
 
-	sum(4, 6, function(error, first, second, sum) {
-		console.log(first); // 4
-		console.log(second); // 6
-		console.log(sum); // 10
-	});
+sum(4, 6, function(error, first, second, sum) {
+	console.log(first); // 4
+	console.log(second); // 6
+	console.log(sum); // 10
+});
+```
 
 This works similarly to Bluebird's [`asCallback(..)`](http://bluebirdjs.com/docs/api/ascallback.html) and that is what Antiquefy uses internally.
 
