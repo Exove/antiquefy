@@ -2,6 +2,18 @@
 
 Create callback-last style functions from functions returning promises and from generator functions.
 
+## Installation
+
+Install from NPM:
+
+	npm install antiquefy
+
+Require Antiquefy in your code:
+
+```js
+var antiquefy = require('antiquefy');
+```
+
 ## Examples
 
 In most cases asynchronous functions which return their results in a callback function can be easily promisified using various promise libraries. However, if you have a 3rd party function which takes a hook-like function with a `done` callback, the process is not so straightforward.
