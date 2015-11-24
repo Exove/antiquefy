@@ -80,26 +80,13 @@ function antiquefy(fn, options) {
 			_fn = Bluebird.coroutine(_fn);
 		}
 
-		// V8 can not optimize functions containing try-catch statements,
-		// therefore the try-catch statement is separated into its own function.
-		// For more info:
-		// https://github.com/petkaantonov/bluebird/wiki/Optimization-killers#2-unsupported-syntax
-		var fnPromise = (function() {
-			try {
-				// Call the function to antiquefy.
-				// Forward the context of this wrapper function to the
-				// antiquefied function.
-				var fnResult = _fn.apply(this, argsToFn);
+		// Wrap the arguments into a promise.
+		var argsPromise = Bluebird.resolve(argsToFn);
 
-				// Convert the result into a Bluebird promise.
-				return Bluebird.resolve(fnResult);
-			}
-			catch (error) {
-				// An error was thrown from the function, return
-				// a rejected promise.
-				return Bluebird.reject(error);
-			}
-		}).call(this);
+		// Spread the arguments to `fn`.
+		// Also bind the the context of this wrapper function to the
+		// antiquefied function, so that it is correctly forwarded to `fn`.
+		var fnPromise = argsPromise.spread(_fn.bind(this));
 
 		// Use Bluebird's `asCallback(..)` to register the antiquefied function's
 		// callback function on this promise.
