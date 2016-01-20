@@ -1,6 +1,6 @@
 {
   "name": "antiquefy",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Create callback-last style functions from functions returning promises and from generator functions.",
   "main": "index.js",
   "scripts": {
@@ -21,8 +21,8 @@
     "url": "https://github.com/Exove/antiquefy"
   },
   "dependencies": {
-    "bluebird": "^3.0.5",
-    "lodash": "^3.10.1"
+    "bluebird": "^3.1.1",
+    "lodash": "^4.0.0"
   },
   "devDependencies": {
     "expect.js": "^0.3.1",
